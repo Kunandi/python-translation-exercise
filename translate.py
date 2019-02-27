@@ -13,8 +13,8 @@ def translate_sequence(rna_sequence, genetic_code):
     If `rna_sequence` is less than 3 bases long, or starts with a stop codon,
     an empty string is returned.
     """
- aa_list = []
-    base_list = list(rna)
+    aa_list = []
+    base_list = list(rna_sequence)
     while True:
         if len(base_list) > 2:
             codon = ''.join(base_list[0:3])
@@ -23,10 +23,10 @@ def translate_sequence(rna_sequence, genetic_code):
             break
         aa = genetic_code[codon]
         if aa == '*':
-            break
+           break
         aa_list.append(aa)
     return ''.join(aa_list)
-    pass
+
 
 def get_all_translations(rna_sequence, genetic_code):
     """Get a list of all amino acid sequences encoded by an RNA sequence.
@@ -43,7 +43,18 @@ def get_all_translations(rna_sequence, genetic_code):
     If no amino acids can be translated from `rna_sequence`, an empty list is
     returned.
     """
-    pass
+    num_bases = len(rna_sequence)
+    last_first_base_index = num_bases - 3
+
+    polypeptide_list = []
+    for i in xrange(last_first_base_index + 1):
+        i_end = i + 3
+        next_three = rna_sequence[i:i_end]
+        if next_three == 'AUG':
+            polypeptide = translate_seq(rna_sequence[i:], genetic_code)
+            polypeptide_list.append(polypeptide)
+    return polypeptide_list
+
 
 def get_reverse(sequence):
     """Reverse orientation of `sequence`.
@@ -52,7 +63,13 @@ def get_reverse(sequence):
 
     If `sequence` is empty, and empty string is returned.
     """
-    pass
+    rna_list = list(sequence)
+    rna_list.reverse = []
+    direction == '-'
+    for i in rna_list:
+        rna_list.reverse.append(direction [i])
+    return ''.join(rna_list.reverse)
+
 
 def get_complement(sequence):
     """Get the complement of `sequence`.
@@ -61,7 +78,12 @@ def get_complement(sequence):
 
     If `sequence` is empty, and empty string is returned.
     """
-    pass
+    rna_list = list(sequence)
+    comp = []
+    complement = {'A' : 'U', 'C' : 'G', 'G': 'C', 'U': 'A'}
+    for i in rna_list:
+        comp.append(complement[i])
+    return ''.join(comp)
 
 def reverse_and_complement(sequence):
     """Get the reversed and complemented form of `sequence`.
@@ -71,7 +93,13 @@ def reverse_and_complement(sequence):
 
     If `sequence` is empty, and empty string is returned.
     """
-    pass
+    rna_list = list(sequence)
+    rna_list.reverse()
+    rev_c = []
+    complement = {'A' : 'U', 'C' : 'G', 'G': 'C', 'U': 'A'}
+    for i in rna_list:
+        rev_c.append(complement[i])
+    return ''.join(rev_c)
 
 def get_longest_peptide(rna_sequence, genetic_code):
     """Get the longest peptide encoded by an RNA sequence.
@@ -84,7 +112,6 @@ def get_longest_peptide(rna_sequence, genetic_code):
     If no amino acids can be translated from `rna_sequence` nor its reverse and
     complement, an empty list is returned.
     """
-    pass
 
 
 if __name__ == '__main__':
